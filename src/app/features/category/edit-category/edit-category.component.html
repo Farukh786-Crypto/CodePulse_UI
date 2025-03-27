@@ -1,0 +1,68 @@
+<div class="container">
+  <h1 class="mt-3">Edit Category</h1>
+
+  <ng-container *ngIf="loading$ | async; else content">
+    <div class="alert alert-info" role="alert">Loading category...</div>
+  </ng-container>
+
+  <ng-template #content>
+    <ng-container *ngIf="category$ | async as category; else notFound">
+      <form [formGroup]="categoryForm">
+        <div class="mt-2">
+          <div class="mt-3">
+            <label for="categoryId" class="form-label">Category Id</label>
+            <input
+              type="text"
+              id="categoryId"
+              class="form-control"
+              name="categoryId"
+              formControlName="id"
+            />
+          </div>
+          <div class="mt-3">
+            <label for="categoryName" class="form-label">Category Name</label>
+            <input
+              type="text"
+              id="categoryName"
+              class="form-control"
+              name="categoryName"
+              formControlName="name"
+            />
+          </div>
+          <div class="mt-3">
+            <label for="categoryUrlHandle" class="form-label"
+              >Category UrlHandle</label
+            >
+            <input
+              type="text"
+              id="categoryUrlHandle"
+              class="form-control"
+              name="categoryUrlHandle"
+              formControlName="urlHandle"
+            />
+          </div>
+          <div class="mt-3 d-flex">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="categoryForm.valid && onFormSubmit(categoryForm)"
+            >
+              Save
+            </button>
+            <button
+              type="submit"
+              class="btn btn-danger ms-3"
+              (click)="deleteCategoryClick()"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </ng-template>
+
+  <ng-template #notFound>
+    <div class="alert alert-warning" role="alert">Category not found!</div>
+  </ng-template>
+</div>
