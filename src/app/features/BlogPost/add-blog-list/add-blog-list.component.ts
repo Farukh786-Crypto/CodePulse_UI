@@ -8,18 +8,24 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AddBlogPost } from '../../../common/AddBlogPost.model';
+import { BlogService } from '../../category/Services/blog.service';
 
 @Component({
   selector: 'app-add-blog-list',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  providers: [BlogService],
   templateUrl: './add-blog-list.component.html',
   styleUrl: './add-blog-list.component.scss',
 })
 export class AddBlogListComponent implements OnInit {
   BlogPostForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private blogService: BlogService,
+  ) {}
   ngOnInit(): void {
     this.BlogPostForm = this.fb.group({
       title: ['', Validators.required],
@@ -32,5 +38,21 @@ export class AddBlogListComponent implements OnInit {
     });
   }
 
-  saveBlogPost() {}
+  saveBlogPost(BlogPostForm: FormGroup) {
+    if (BlogPostForm.invalid) {
+      return;
+    }
+    const BlogData: AddBlogPost = {
+      title: BlogPostForm.get('title')?.value,
+      shortDescription: BlogPostForm.get('shortDescription')?.value,
+      content: BlogPostForm.get('content')?.value,
+      featuredImageUrl: BlogPostForm.get('featuredImageUrl')?.value,
+      urlHandle: BlogPostForm.get('urlHandle')?.value,
+      publishedDate: BlogPostForm.get('publishedDate')?.value,
+      author: BlogPostForm.get('author')?.value,
+    };
+    this.blogService.postBlogPost(BlogData).subscribe((res) => {
+      console.log('Blog post data succesfully !!');
+    });
+  }
 }

@@ -4,7 +4,7 @@
     <div class="card-body">
       <form
         [formGroup]="BlogPostForm"
-        (ngSubmit)="BlogPostForm.valid && saveBlogPost()"
+        (ngSubmit)="BlogPostForm.valid && saveBlogPost(BlogPostForm)"
       >
         <div class="mt-2">
           <label class="form-label">Title</label>

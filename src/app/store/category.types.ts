@@ -8,11 +8,14 @@ export interface Category {
   urlHandle: string;
 }
 
-// Response getting For Post category
-export interface CategoryResponse {
+export interface codePulse {
   success: boolean;
   message: string;
 }
+
+export interface BlogPost extends codePulse {}
+// Response getting For Post category
+export interface CategoryResponse extends codePulse {}
 
 // Response getting get By category Id
 export interface CategorySingleResponse {
