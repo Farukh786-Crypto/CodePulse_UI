@@ -30,6 +30,18 @@ export interface GetCategoryResponse {
   data: Category[];
 }
 
+export interface BlogPostSingleResponse {
+  success: boolean;
+  message: string;
+  data: BlogPost;
+}
+
+export interface GetBlogPostsResponse {
+  success: boolean;
+  message: string;
+  data: BlogPost[];
+}
+
 // passing Datastate and their response
 export interface CodePulseStoreState {
   categoryStore: DataState<CategoryResponse>;

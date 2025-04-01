@@ -14,12 +14,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { provideHttpClient } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment.development';
+import { MarkdownModule } from 'ngx-markdown';
+import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderRouterModule.forRoot({ showForeground: true }),
+    MarkdownModule.forRoot(),
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StoreModule.forFeature('category', CodePulseReducer),

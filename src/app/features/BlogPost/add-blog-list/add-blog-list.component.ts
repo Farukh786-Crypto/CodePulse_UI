@@ -10,17 +10,25 @@ import {
 import { RouterModule } from '@angular/router';
 import { AddBlogPost } from '../../../common/AddBlogPost.model';
 import { BlogService } from '../../category/Services/blog.service';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'app-add-blog-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    MarkdownModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
   providers: [BlogService],
   templateUrl: './add-blog-list.component.html',
   styleUrl: './add-blog-list.component.scss',
 })
 export class AddBlogListComponent implements OnInit {
   BlogPostForm!: FormGroup;
+  contentValue!: string;
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +43,9 @@ export class AddBlogListComponent implements OnInit {
       featuredImageUrl: ['', Validators.required],
       publishedDate: ['', Validators.required],
       author: ['', Validators.required],
+    });
+    this.BlogPostForm.get('content')?.valueChanges.subscribe((value) => {
+      this.contentValue = value;
     });
   }
 
@@ -52,6 +63,7 @@ export class AddBlogListComponent implements OnInit {
       author: BlogPostForm.get('author')?.value,
     };
     this.blogService.postBlogPost(BlogData).subscribe((res) => {
+      this.BlogPostForm.reset();
       console.log('Blog post data succesfully !!');
     });
   }
