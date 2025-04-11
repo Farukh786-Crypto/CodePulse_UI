@@ -1,3 +1,5 @@
+import { Category } from '../store/category.types';
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -8,4 +10,5 @@ export interface BlogPost {
   publishedDate: string;
   author: string;
   isVisible: true;
+  categories: Category[];
 }

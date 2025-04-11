@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
+import { ApplicationRoute, RouteTo } from '../../../app-routing.module';
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +47,8 @@ export class HttpService {
     const status = response.status;
 
     if (status === 401) {
-      this.router.navigate(['/login']);
+      // this.router.navigate(['/login']);
+      this.router.navigate([RouteTo(ApplicationRoute.Login)]);
     }
 
     if (key === 'isTrusted') {

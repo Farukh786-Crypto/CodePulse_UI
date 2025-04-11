@@ -1,3 +1,12 @@
 <ngx-ui-loader></ngx-ui-loader>
 <app-navbar></app-navbar>
+<!-- <button (click)="reset()" *ngIf="timedOut">Restart</button> -->
+<p>
+  <strong>{{ idleState }}</strong>
+</p>
+<p *ngIf="lastPing">
+  <small
+    >Last keepalive ping <strong>{{ lastPing | amTimeAgo }}</strong></small
+  >
+</p>
 <router-outlet></router-outlet>

@@ -17,6 +17,8 @@ import { loadCategory } from '../../../store/category.actions';
 import { Subject, take } from 'rxjs';
 import { CategoryService } from '../Services/category.service';
 import { Router } from '@angular/router';
+import { ApplicationRoute, RouteTo } from '../../../app-routing.module';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-category',
@@ -33,6 +35,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private store: Store,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit() {
@@ -63,7 +66,9 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
             .select(selectCategories)
             .pipe(take(1))
             .subscribe((categories) => {
-              this.router.navigateByUrl('/admin/categories');
+              this.toastr.success('Hello world!', 'Toastr fun!');
+              // this.router.navigateByUrl('/admin/categories');
+              this.router.navigate([RouteTo(ApplicationRoute.GetCategoryList)]);
               console.log('Form Submitted', onSubmit);
             });
         }

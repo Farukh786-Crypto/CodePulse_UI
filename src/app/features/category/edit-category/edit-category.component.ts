@@ -25,6 +25,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ApplicationRoute, RouteTo } from '../../../app-routing.module';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-category',
@@ -48,6 +50,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
     private store: Store,
     private fb: FormBuilder,
     private route: Router,
+    private toastr: ToastrService,
   ) {}
   ngOnInit(): void {
     this.categoryForm = this.fb.group({
@@ -92,7 +95,9 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe((res) => {
         if (res?.success) {
-          this.route.navigateByUrl('/admin/categories');
+          this.toastr.success('Hello world!', 'Toastr fun!');
+          // this.route.navigateByUrl('/admin/categories');
+          this.route.navigate([RouteTo(ApplicationRoute.GetCategoryList)]);
         }
       });
   }
@@ -114,7 +119,10 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
             .subscribe((data) => {
               if (data?.success) {
                 //alert(data.message);
-                this.route.navigateByUrl('/admin/categories');
+                // this.route.navigateByUrl('/admin/categories');
+                this.route.navigate([
+                  RouteTo(ApplicationRoute.GetCategoryList),
+                ]);
               }
             });
         }
