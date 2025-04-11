@@ -82,6 +82,10 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
   }
 
   onFormSubmit(categoryForm: FormGroup) {
+    if (this.categoryForm.invalid) {
+      this.toastr.showError('Please Filed Category', 'Error');
+      return;
+    }
     console.log('Form Submitted !!', categoryForm);
     this.store.dispatch(
       updateCategory({

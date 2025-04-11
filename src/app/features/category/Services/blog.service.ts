@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
 import { ApiResponseModel } from '../../../common/common';
-import { BlogPost, GetBlogPostsResponse } from '../../../store/category.types';
+import { GetBlogPostsResponse } from '../../../store/category.types';
 import { AddBlogPost } from '../../../common/AddBlogPost.model';
+import { BlogPost } from '../../../common/BlogPost.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +18,9 @@ export class BlogService {
 
   postBlogPost(blogPost: AddBlogPost): Observable<ApiResponseModel<BlogPost>> {
     return this.https.post<ApiResponseModel<BlogPost>>('BlogPosts', blogPost);
+  }
+
+  getBlofPostById(id: string): Observable<ApiResponseModel<BlogPost>> {
+    return this.https.get(`BlogPosts/${id}`);
   }
 }

@@ -1,1 +1,141 @@
-<p>edit-blog works!</p>
+<div class="mt-3">
+  <h1 class="mt-3">Add Blog</h1>
+  <div class="card ms-5" style="width: 80rem">
+    <div class="card-body">
+      <ng-container *ngIf="BlogPostForm">
+        <form [formGroup]="BlogPostForm" (ngSubmit)="editBlogPost()">
+          <div class="mt-2">
+            <label class="form-label">Title</label>
+            <input
+              type="text"
+              id="blogpostTitle"
+              class="form-control"
+              name="blogpostTitle"
+              formControlName="title"
+            />
+          </div>
+          <div class="mt-2">
+            <label class="form-label">Url Handle</label>
+            <input
+              type="text"
+              id="blogposturlHandle"
+              class="form-control"
+              name="blogposturlHandle"
+              formControlName="urlHandle"
+            />
+          </div>
+          <div class="mt-2">
+            <label class="form-label">Short Description</label>
+            <input
+              type="text"
+              id="blogpostshortDescription"
+              class="form-control"
+              name="blogpostshortDescription"
+              formControlName="shortDescription"
+            />
+          </div>
+          <div class="mt-2">
+            <label class="form-label">Content</label>
+            <!-- <textarea
+                name="content"
+                id="content"
+                class="form-control"
+                formControlName="content"
+              ></textarea> -->
+            <div class="d-flex flex-row">
+              <div class="col-6 p-2">
+                <textarea
+                  name="content"
+                  id="content"
+                  class="form-control"
+                  formControlName="content"
+                  style="height: 350px; max-height: 350px"
+                ></textarea>
+              </div>
+              <div
+                class="col-6 p-2"
+                style="max-height: 350px; overflow-y: scroll"
+              >
+                <markdown [data]="contentValue"> </markdown>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <label class="form-label">Featured Image Url</label>
+            <ng-container *ngIf="featureImageUrl !== ''">
+              <div>
+                <img [src]="featureImageUrl" height="100" class="my-2" />
+              </div>
+            </ng-container>
+            <input
+              type="text"
+              id="blogpostfeaturedUrl"
+              class="form-control"
+              name="blogpostfeaturedUrl"
+              formControlName="featuredImageUrl"
+            />
+          </div>
+          <div class="mt-2">
+            <label class="form-label">Published Date</label>
+            <input
+              type="date"
+              id="blogpostpublishedDate"
+              class="form-control"
+              name="blogpostpublishedDate"
+              formControlName="publishedDate"
+            />
+          </div>
+          <div class="mt-2">
+            <label class="form-label">Author</label>
+            <input
+              type="text"
+              id="blogpostauthor"
+              class="form-control"
+              name="blogpostauthor"
+              formControlName="author"
+            />
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="isVisible"
+              name="isVisible"
+              formControlName="isVisible"
+            />
+            <label class="form-check-label" for="isVisible">Is Visible?</label>
+          </div>
+          <div class="mt-3">
+            <label for="catories" class="form-label">Categories</label>
+            <ng-container *ngIf="categoriesData">
+              <select
+                class="form-select form-select-sm"
+                name="categories"
+                id="categories"
+                formControlName="categories"
+                multiple
+              >
+                <option
+                  *ngFor="let categories of categoriesData"
+                  [value]="categories.id"
+                >
+                  {{ categories.name }}
+                </option>
+              </select>
+            </ng-container>
+          </div>
+          <div class="mt-3">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="BlogPostForm.invalid"
+            >
+              Save
+            </button>
+            <button type="submit" class="btn btn-danger ms-2">Delete</button>
+          </div>
+        </form>
+      </ng-container>
+    </div>
+  </div>
+</div>

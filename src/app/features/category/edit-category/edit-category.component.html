@@ -45,7 +45,8 @@
             <button
               type="submit"
               class="btn btn-primary"
-              (click)="categoryForm.valid && onFormSubmit(categoryForm)"
+              [disabled]="categoryForm.invalid"
+              (click)="onFormSubmit(categoryForm)"
             >
               Save
             </button>
