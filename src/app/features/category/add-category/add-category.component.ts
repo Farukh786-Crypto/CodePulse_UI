@@ -47,9 +47,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(onSubmit: Category) {
-    debugger;
     if (this.categoryForm.invalid) {
-      debugger;
       //alert('Please fill out the form correctly.');
       this.tostr.showError('Please fill out the form correctly.', 'Error');
       return;
