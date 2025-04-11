@@ -26,7 +26,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApplicationRoute, RouteTo } from '../../../app-routing.module';
-import { ToastrService } from 'ngx-toastr';
+import { ToStrService } from '../Services/to-str.service';
 
 @Component({
   selector: 'app-edit-category',
@@ -50,7 +50,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
     private store: Store,
     private fb: FormBuilder,
     private route: Router,
-    private toastr: ToastrService,
+    private toastr: ToStrService,
   ) {}
   ngOnInit(): void {
     this.categoryForm = this.fb.group({
@@ -95,7 +95,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe((res) => {
         if (res?.success) {
-          this.toastr.success('Hello world!', 'Toastr fun!');
+          this.toastr.showSuccess('Category is Saved !!', 'success');
           // this.route.navigateByUrl('/admin/categories');
           this.route.navigate([RouteTo(ApplicationRoute.GetCategoryList)]);
         }
