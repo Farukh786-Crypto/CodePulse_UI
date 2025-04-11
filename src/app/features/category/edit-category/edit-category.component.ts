@@ -36,7 +36,7 @@ import { ToStrService } from '../Services/to-str.service';
   styleUrl: './edit-category.component.scss',
 })
 export class EditCategoryComponent implements OnInit, OnDestroy {
-  id: number = 0;
+  id = 0;
   paramsSubscriptions?: Subscription;
   category?: Category;
   categoryForm!: FormGroup;
