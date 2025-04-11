@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
 import { ApiResponseModel } from '../../../common/common';
-import {
-  BlogPost,
-  GetBlogPostsResponse,
-  GetCategoryResponse,
-} from '../../../store/category.types';
+import { BlogPost, GetBlogPostsResponse } from '../../../store/category.types';
 import { AddBlogPost } from '../../../common/AddBlogPost.model';
 
 @Injectable({

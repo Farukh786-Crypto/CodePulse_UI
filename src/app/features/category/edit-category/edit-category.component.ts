@@ -26,7 +26,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApplicationRoute, RouteTo } from '../../../app-routing.module';
-import { ToStrService } from '../Services/to-str.service';
+import { ToStrService } from '../Services';
 
 @Component({
   selector: 'app-edit-category',

@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CodePulseStoreState } from './category.types';
-import { state } from '@angular/animations';
 
 // Get the feature state
 const selectCategoryFeature =

@@ -18,7 +18,7 @@ import { Subject, take } from 'rxjs';
 import { CategoryService } from '../Services/category.service';
 import { Router } from '@angular/router';
 import { ApplicationRoute, RouteTo } from '../../../app-routing.module';
-import { ToStrService } from '../Services/to-str.service';
+import { ToStrService } from '../Services';
 
 @Component({
   selector: 'app-add-category',

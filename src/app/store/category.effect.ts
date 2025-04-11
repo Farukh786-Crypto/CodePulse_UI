@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { CategoryService } from '../features/category/Services/category.service';
 import {
   deleteCategory,
   deleteCategoryFailure,
@@ -19,6 +18,7 @@ import {
   updateCategorySuccess,
 } from './category.actions';
 import { catchError, map, of, switchMap } from 'rxjs';
+import { CategoryService } from '../features/category/Services';
 
 @Injectable()
 export class CategoryEffects {
