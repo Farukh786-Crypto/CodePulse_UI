@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BlogService } from '../../category/Services/blog.service';
-import { BlogPost } from '../../../common/BlogPost.model';
+import { BlogPost } from '../../../common/Models/BlogPost.model';
 
 @Component({
   selector: 'app-blog-list',

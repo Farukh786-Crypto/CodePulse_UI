@@ -1,4 +1,4 @@
-import { Category } from '../store/category.types';
+import { Category } from '../../store/category.types';
 
 export interface BlogPost {
   id: string;

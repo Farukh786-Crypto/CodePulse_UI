@@ -1,15 +1,24 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, take } from 'rxjs';
+import { Subscription, switchMap, take } from 'rxjs';
 import { BlogService, ToStrService } from '../../category/Services';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
+  NgForm,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
+import { Category } from '../../../store/category.types';
+import { ApplicationRoute, RouteTo } from '../../../app-routing.module';
+import { Store } from '@ngrx/store';
+import {
+  selectgetCategory,
+  selectgetCategoryLoaded,
+} from '../../../store/category.selectors';
+import { getLoadCategory } from '../../../store/category.actions';
 
 @Component({
   selector: 'app-edit-blog',
@@ -21,14 +30,19 @@ import { MarkdownModule } from 'ngx-markdown';
 })
 export class EditBlogComponent implements OnInit, OnDestroy {
   routeSubscription?: Subscription;
+  updateBlogPostSubscription?: Subscription;
   id!: string | null;
   BlogPostForm!: FormGroup;
+  getAllCategories: Category[] = [];
+  blogPostId: string = '';
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private tostr: ToStrService,
     private BlogPostservice: BlogService,
     private fb: FormBuilder,
+    private store: Store,
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +74,8 @@ export class EditBlogComponent implements OnInit, OnDestroy {
     });
   }
   getPostById(id: string) {
+    // dispatch action
+    this.store.dispatch(getLoadCategory());
     this.BlogPostservice.getBlofPostById(id).subscribe({
       next: (res) => {
         const data = res.data;
@@ -76,11 +92,30 @@ export class EditBlogComponent implements OnInit, OnDestroy {
           isVisible: data.isVisible,
           categories: data.categories || [],
         });
+        //this.getAllCategories = data.categories;
       },
       error: (err) => {
         console.log();
       },
-      complete: () => {},
+      complete: () => {
+        this.store
+          .select(selectgetCategoryLoaded)
+          .pipe(
+            take(1),
+            switchMap((isLoaded) => {
+              if (isLoaded) {
+                return this.store.select(selectgetCategory).pipe(take(1));
+              }
+              return [];
+            }),
+          )
+          .subscribe((categories) => {
+            if (categories) {
+              this.getAllCategories = categories.data;
+            }
+            console.log('Categories', categories);
+          });
+      },
     });
   }
 
@@ -93,14 +128,37 @@ export class EditBlogComponent implements OnInit, OnDestroy {
   }
 
   get categoriesData() {
-    return this.BlogPostForm.get('categories')?.value || '';
+    let getCategoriesData = this.BlogPostForm.get('categories')?.value || '';
+    console.log('getCategoriesData', getCategoriesData);
+    return getCategoriesData;
   }
 
-  editBlogPost() {
-    console.log('Data edited !!');
+  editBlogPost(BlogPostForm: FormGroup) {
+    if (BlogPostForm.invalid) {
+      this.tostr.showError('Please filed the BlogPost Form', 'Error');
+    }
+    this.blogPostId = this.BlogPostForm.get('id')?.value;
+    this.BlogPostservice.updateBlogPost(
+      this.blogPostId,
+      this.BlogPostForm.value,
+    ).subscribe({
+      next: (updateres) => {
+        if (updateres) {
+          this.tostr.showSuccess(updateres.message, 'Sucess');
+        }
+      },
+      error: (err) => {
+        this.tostr.showError(err, 'Error');
+      },
+      complete: () => {
+        this.router.navigate([RouteTo(ApplicationRoute.GetBlogPost)]);
+      },
+    });
+    console.log('Data edited !!', this.BlogPostForm.value);
   }
 
   ngOnDestroy(): void {
     this.routeSubscription?.unsubscribe();
+    this.updateBlogPostSubscription?.unsubscribe();
   }
 }

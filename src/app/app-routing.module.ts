@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './common/components/not-found/not-found.component';
 
 export enum ApplicationRoute {
   Login = 'login',
@@ -63,6 +64,10 @@ const routes: Routes = [
         (m) => m.EditBlogComponent,
       );
     },
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 

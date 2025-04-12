@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AddBlogPost } from '../../../common/AddBlogPost.model';
+import { AddBlogPost } from '../../../common/Models/AddBlogPost.model';
 import { BlogService } from '../../category/Services/blog.service';
 import { MarkdownModule } from 'ngx-markdown';
 import { Store } from '@ngrx/store';
