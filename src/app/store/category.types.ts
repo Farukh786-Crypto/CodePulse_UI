@@ -33,7 +33,7 @@ export interface GetCategoryResponse {
 export interface BlogPostSingleResponse {
   success: boolean;
   message: string;
-  data: BlogPost;
+  data?: BlogPost;
 }
 
 export interface GetBlogPostsResponse {

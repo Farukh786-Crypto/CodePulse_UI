@@ -34,6 +34,7 @@ export class HttpService {
   }
 
   delete<T>(url: string, body?: any | null): Observable<T> {
+    this.delete;
     return this.http
       .delete<T>(this.baseUrl + url, { body })
       .pipe(catchError(this.errorHandler.bind(this)));

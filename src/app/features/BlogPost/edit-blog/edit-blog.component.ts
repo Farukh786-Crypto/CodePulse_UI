@@ -143,7 +143,7 @@ export class EditBlogComponent implements OnInit, OnDestroy {
       this.BlogPostForm.value,
     ).subscribe({
       next: (updateres) => {
-        if (updateres) {
+        if (updateres.success) {
           this.tostr.showSuccess(updateres.message, 'Sucess');
         }
       },
@@ -155,6 +155,22 @@ export class EditBlogComponent implements OnInit, OnDestroy {
       },
     });
     console.log('Data edited !!', this.BlogPostForm.value);
+  }
+
+  deletedPost() {
+    let blogId = this.BlogPostForm.get('id')?.value;
+    this.BlogPostservice.deletePost(blogId).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.tostr.showSuccess(res.message, 'Sucess');
+          this.router.navigate([RouteTo(ApplicationRoute.GetBlogPost)]);
+        }
+      },
+      error: (err) => {
+        this.tostr.showError(err, 'Error');
+      },
+      complete: () => {},
+    });
   }
 
   ngOnDestroy(): void {
