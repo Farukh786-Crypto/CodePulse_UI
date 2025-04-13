@@ -31,6 +31,8 @@ import { getLoadCategory } from '../../../store/category.actions';
 export class EditBlogComponent implements OnInit, OnDestroy {
   routeSubscription?: Subscription;
   updateBlogPostSubscription?: Subscription;
+  deleteBlogPostSubscription?: Subscription;
+  getBlogById?: Subscription;
   id!: string | null;
   BlogPostForm!: FormGroup;
   getAllCategories: Category[] = [];
@@ -76,7 +78,7 @@ export class EditBlogComponent implements OnInit, OnDestroy {
   getPostById(id: string) {
     // dispatch action
     this.store.dispatch(getLoadCategory());
-    this.BlogPostservice.getBlofPostById(id).subscribe({
+    this.getBlogById = this.BlogPostservice.getBlogPostById(id).subscribe({
       next: (res) => {
         const data = res.data;
         console.log('BlogPost Form shows', res.data);
@@ -138,7 +140,7 @@ export class EditBlogComponent implements OnInit, OnDestroy {
       this.tostr.showError('Please filed the BlogPost Form', 'Error');
     }
     this.blogPostId = this.BlogPostForm.get('id')?.value;
-    this.BlogPostservice.updateBlogPost(
+    this.updateBlogPostSubscription = this.BlogPostservice.updateBlogPost(
       this.blogPostId,
       this.BlogPostForm.value,
     ).subscribe({
@@ -159,7 +161,9 @@ export class EditBlogComponent implements OnInit, OnDestroy {
 
   deletedPost() {
     let blogId = this.BlogPostForm.get('id')?.value;
-    this.BlogPostservice.deletePost(blogId).subscribe({
+    this.deleteBlogPostSubscription = this.BlogPostservice.deletePost(
+      blogId,
+    ).subscribe({
       next: (res) => {
         if (res.success) {
           this.tostr.showSuccess(res.message, 'Sucess');
@@ -175,6 +179,8 @@ export class EditBlogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routeSubscription?.unsubscribe();
+    this.deleteBlogPostSubscription?.unsubscribe();
     this.updateBlogPostSubscription?.unsubscribe();
+    this.getBlogById?.unsubscribe();
   }
 }

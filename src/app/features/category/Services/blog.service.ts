@@ -24,7 +24,7 @@ export class BlogService {
     return this.https.post<ApiResponseModel<BlogPost>>('BlogPosts', blogPost);
   }
 
-  getBlofPostById(id: string): Observable<ApiResponseModel<BlogPost>> {
+  getBlogPostById(id: string): Observable<ApiResponseModel<BlogPost>> {
     return this.https.get(`BlogPosts/${id}`);
   }
 
