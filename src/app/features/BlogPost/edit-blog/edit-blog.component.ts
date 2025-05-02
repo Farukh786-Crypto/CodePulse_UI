@@ -19,12 +19,21 @@ import {
   selectgetCategoryLoaded,
 } from '../../../store/category.selectors';
 import { getLoadCategory } from '../../../store/category.actions';
+import { ImageSelectorComponent } from '../../../common/components/image-selector/image-selector.component';
+import { ImageService } from '../../../common/services/image.service';
+import { BlogImage } from '../../../common/Models/BlogImage.model';
 
 @Component({
   selector: 'app-edit-blog',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MarkdownModule],
-  providers: [BlogService],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MarkdownModule,
+    ImageSelectorComponent,
+  ],
+  providers: [BlogService, ImageService],
   templateUrl: './edit-blog.component.html',
   styleUrl: './edit-blog.component.scss',
 })
@@ -32,11 +41,13 @@ export class EditBlogComponent implements OnInit, OnDestroy {
   routeSubscription?: Subscription;
   updateBlogPostSubscription?: Subscription;
   deleteBlogPostSubscription?: Subscription;
+  imageselectSubscription?: Subscription;
   getBlogById?: Subscription;
   id!: string | null;
   BlogPostForm!: FormGroup;
   getAllCategories: Category[] = [];
   blogPostId: string = '';
+  isImageSelectorVisible: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +56,7 @@ export class EditBlogComponent implements OnInit, OnDestroy {
     private BlogPostservice: BlogService,
     private fb: FormBuilder,
     private store: Store,
+    private imageservice: ImageService,
   ) {}
 
   ngOnInit(): void {
@@ -75,6 +87,13 @@ export class EditBlogComponent implements OnInit, OnDestroy {
       },
     });
   }
+
+  onImageSelected(image: BlogImage) {
+    this.BlogPostForm.patchValue({
+      featuredImageUrl: image.url,
+    });
+  }
+
   getPostById(id: string) {
     // dispatch action
     this.store.dispatch(getLoadCategory());
@@ -131,7 +150,6 @@ export class EditBlogComponent implements OnInit, OnDestroy {
 
   get categoriesData() {
     let getCategoriesData = this.BlogPostForm.get('categories')?.value || '';
-    console.log('getCategoriesData', getCategoriesData);
     return getCategoriesData;
   }
 
@@ -175,6 +193,14 @@ export class EditBlogComponent implements OnInit, OnDestroy {
       },
       complete: () => {},
     });
+  }
+
+  openImageSelector() {
+    this.isImageSelectorVisible = true;
+  }
+
+  closeImageSelector() {
+    this.isImageSelectorVisible = false;
   }
 
   ngOnDestroy(): void {

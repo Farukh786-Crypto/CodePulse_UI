@@ -19,6 +19,8 @@ import {
 } from '../../../store/category.selectors';
 import { switchMap, take, tap } from 'rxjs';
 import { Category } from '../../../store/category.types';
+import { BlogImage } from '../../../common/Models/BlogImage.model';
+import { ImageSelectorComponent } from '../../../common/components/image-selector/image-selector.component';
 
 @Component({
   selector: 'app-add-blog-list',
@@ -29,6 +31,7 @@ import { Category } from '../../../store/category.types';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    ImageSelectorComponent,
   ],
   providers: [BlogService],
   templateUrl: './add-blog-list.component.html',
@@ -39,6 +42,7 @@ export class AddBlogListComponent implements OnInit {
   contentValue!: string;
   featureImageUrl!: string;
   categoriesData: Category[] = [];
+  isImageSelectorVisible: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -87,6 +91,20 @@ export class AddBlogListComponent implements OnInit {
         this.featureImageUrl = value;
       },
     );
+  }
+
+  openImageSelector() {
+    this.isImageSelectorVisible = true;
+  }
+
+  closeImageSelector() {
+    this.isImageSelectorVisible = false;
+  }
+
+  onImageSelected(image: BlogImage) {
+    this.BlogPostForm.patchValue({
+      featuredImageUrl: image.url,
+    });
   }
 
   saveBlogPost(BlogPostForm: FormGroup) {

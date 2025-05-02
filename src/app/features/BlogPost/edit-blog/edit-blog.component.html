@@ -64,7 +64,16 @@
             </div>
           </div>
           <div class="mt-2">
-            <label class="form-label">Featured Image Url</label>
+            <label class="form-label"
+              >Featured Image Url
+              <button
+                type="button"
+                class="btn btn-light"
+                (click)="openImageSelector()"
+              >
+                Select Image
+              </button>
+            </label>
             <ng-container *ngIf="featureImageUrl !== ''">
               <div>
                 <img [src]="featureImageUrl" height="100" class="my-2" />
@@ -147,4 +156,27 @@
       </ng-container>
     </div>
   </div>
+</div>
+
+<!-- app-image-selector component is selector called here -->
+<div
+  class="image-container-modal"
+  [ngClass]="{
+    'd-block': isImageSelectorVisible,
+    'd-none': !isImageSelectorVisible,
+  }"
+>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    class="btn btn-light"
+    style="position: fixed; top: 10px; right: 10px"
+    (click)="closeImageSelector()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <app-image-selector
+    (imageUrlSelected)="onImageSelected($event)"
+  ></app-image-selector>
 </div>

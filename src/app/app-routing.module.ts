@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './common/components/not-found/not-found.component';
 
 export enum ApplicationRoute {
+  Home = 'home',
   Login = 'login',
   GetCategoryList = 'admin/categories',
   CategoryListAdd = 'admin/categories/add',
@@ -10,6 +11,7 @@ export enum ApplicationRoute {
   GetBlogPost = 'admin/blogposts',
   BlogPostAdd = 'admin/blogpost/add',
   GetBlogPostId = 'admin/blogpost/:id',
+  GetBlogDetails = 'blog/:url',
 }
 
 export function RouteTo(appRoute: ApplicationRoute) {
@@ -17,6 +19,22 @@ export function RouteTo(appRoute: ApplicationRoute) {
 }
 
 const routes: Routes = [
+  {
+    path: '',
+    loadComponent() {
+      return import('./features/public/home/home.component').then(
+        (a) => a.HomeComponent,
+      );
+    },
+  },
+  {
+    path: ApplicationRoute.GetBlogDetails,
+    loadComponent() {
+      return import(
+        './features/public/blog-details/blog-details.component'
+      ).then((a) => a.BlogDetailsComponent);
+    },
+  },
   {
     path: ApplicationRoute.GetCategoryList,
     loadComponent() {

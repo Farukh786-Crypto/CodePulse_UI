@@ -16,8 +16,8 @@ import { UpdateBlogPost } from '../../../common/Models/UpdateBlogPost.model';
 export class BlogService {
   constructor(private https: HttpService) {}
 
-  getBlogPosts(): Observable<ApiResponseModel<GetBlogPostsResponse>> {
-    return this.https.get<ApiResponseModel<GetBlogPostsResponse>>('BlogPosts');
+  getBlogPosts(): Observable<ApiResponseModel<BlogPost[]>> {
+    return this.https.get<ApiResponseModel<BlogPost[]>>('BlogPosts');
   }
 
   postBlogPost(blogPost: AddBlogPost): Observable<ApiResponseModel<BlogPost>> {
