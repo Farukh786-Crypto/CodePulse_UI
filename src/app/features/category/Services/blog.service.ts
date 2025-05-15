@@ -28,6 +28,12 @@ export class BlogService {
     return this.https.get(`BlogPosts/${id}`);
   }
 
+  getBlogPostByUrlHandle(
+    urlHandle: string,
+  ): Observable<ApiResponseModel<BlogPost>> {
+    return this.https.get(`BlogPosts/${urlHandle}`);
+  }
+
   // http://localhost:5029/api/BlogPosts/3fa85f64-5717-4562-b3fc-2c963f66afa6
   updateBlogPost(
     id: string,

@@ -22,10 +22,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.blogServiceSubscription = this.blogService.getBlogPosts().subscribe({
       next: (res) => {
         //console.log(res);
+        // Solution 1
         // res.data.forEach((e) => {
         //   console.log(e);
         //   this.blogs.push(e);
         // });
+        // solution 2
         if (res.data) this.blogs.push(...res.data);
       },
       complete: () => {},
