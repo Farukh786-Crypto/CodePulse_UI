@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'ngx-moment';
+import { AuthService } from './features/auth/login/services/auth.service';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -47,6 +48,7 @@ import { MomentModule } from 'ngx-moment';
     { provide: 'CODEBASEURL', useValue: environment.apiBaseUrl },
     provideClientHydration(),
     provideHttpClient(),
+    AuthService,
   ],
   bootstrap: [AppComponent],
 })

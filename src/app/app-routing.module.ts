@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './common/components/not-found/not-found.component';
-import {} from './features/public/blog-details/blog-details.component';
+import { LoginComponent } from './features/auth/login/login.component';
 
 export enum ApplicationRoute {
   Home = 'home',
@@ -25,6 +25,14 @@ const routes: Routes = [
     loadComponent() {
       return import('./features/public/home/home.component').then(
         (a) => a.HomeComponent,
+      );
+    },
+  },
+  {
+    path: 'login',
+    loadComponent() {
+      return import('./features/auth/login/login.component').then(
+        (a) => a.LoginComponent,
       );
     },
   },
