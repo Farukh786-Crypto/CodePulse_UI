@@ -30,12 +30,10 @@ export class LoginComponent {
   }
 
   onFormSubmit(): void {
-    debugger;
     console.log(this.model);
     this.authService.login(this.model).subscribe({
       next: (res) => {
         if (res) {
-          debugger;
           // set Auth cookies
           console.log(res);
           this.cookieService.set(
@@ -47,7 +45,6 @@ export class LoginComponent {
             true,
             'Strict',
           );
-          debugger;
           // Set User
           this.authService.setUser({
             email: res.email,

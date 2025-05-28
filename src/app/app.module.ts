@@ -11,7 +11,11 @@ import { StoreModule } from '@ngrx/store';
 import { CodePulseReducer } from './store/category.reducer';
 import { CategoryEffects } from './store/category.effect';
 import { EffectsModule } from '@ngrx/effects';
-import { provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  provideHttpClient,
+} from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment.development';
 import { MarkdownModule } from 'ngx-markdown';
@@ -21,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'ngx-moment';
 import { AuthService } from './features/auth/login/services/auth.service';
+import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -43,12 +48,18 @@ import { AuthService } from './features/auth/login/services/auth.service';
     StoreModule.forFeature('category', CodePulseReducer),
     EffectsModule.forFeature([CategoryEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    HttpClientModule,
   ],
   providers: [
     { provide: 'CODEBASEURL', useValue: environment.apiBaseUrl },
     provideClientHydration(),
     provideHttpClient(),
     AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

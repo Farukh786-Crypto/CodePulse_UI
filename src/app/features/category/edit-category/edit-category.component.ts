@@ -27,11 +27,20 @@ import {
 } from '@angular/forms';
 import { ApplicationRoute, RouteTo } from '../../../app-routing.module';
 import { ToStrService } from '../Services';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../../../core/interceptor/auth.interceptor';
 
 @Component({
   selector: 'app-edit-category',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   templateUrl: './edit-category.component.html',
   styleUrl: './edit-category.component.scss',
 })

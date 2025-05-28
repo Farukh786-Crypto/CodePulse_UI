@@ -3,6 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../features/auth/login/services/auth.service';
 import { User } from '../../../common/Models/User.model';
 import { CookieService } from 'ngx-cookie-service';
+import { ApplicationRoute } from '../../../app-routing.module';
 
 @Component({
   selector: 'app-navbar',
@@ -18,11 +19,9 @@ export class NavbarComponent implements OnInit {
     private router: Router,
   ) {}
   ngOnInit(): void {
-    debugger;
     this.authService.user().subscribe({
       next: (res) => {
         if (res) {
-          debugger;
           this.user = res;
           console.log('navbar', res);
         }
@@ -36,8 +35,9 @@ export class NavbarComponent implements OnInit {
     this.user = this.authService.getUser();
   }
   onLogout(): void {
-    debugger;
     this.authService.logout();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl(ApplicationRoute.Login).then(() => {
+      window.location.reload();
+    });
   }
 }

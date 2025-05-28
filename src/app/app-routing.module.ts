@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './common/components/not-found/not-found.component';
-import { LoginComponent } from './features/auth/login/login.component';
+import { AuthGuard } from './features/auth/guards/auth.guard';
 
 export enum ApplicationRoute {
   Home = 'home',
@@ -13,6 +13,7 @@ export enum ApplicationRoute {
   BlogPostAdd = 'admin/blogpost/add',
   GetBlogPostId = 'admin/blogpost/:id',
   GetBlogDetails = 'blog/:url',
+  NavBarComp = 'navbarlink',
 }
 
 export function RouteTo(appRoute: ApplicationRoute) {
@@ -51,6 +52,7 @@ const routes: Routes = [
         './features/public/blog-details/blog-details.component'
       ).then((a) => a.BlogDetailsComponent);
     },
+    canActivate: [AuthGuard],
   },
   {
     path: ApplicationRoute.GetCategoryList,
@@ -59,6 +61,7 @@ const routes: Routes = [
         './features/category/category-list/category-list.component'
       ).then((m) => m.CategoryListComponent);
     },
+    canActivate: [AuthGuard],
   },
   {
     path: ApplicationRoute.CategoryListAdd,
@@ -67,6 +70,7 @@ const routes: Routes = [
         './features/category/add-category/add-category.component'
       ).then((m) => m.AddCategoryComponent);
     },
+    canActivate: [AuthGuard],
   },
   {
     path: ApplicationRoute.GetCategoryId,
@@ -75,6 +79,7 @@ const routes: Routes = [
         './features/category/edit-category/edit-category.component'
       ).then((m) => m.EditCategoryComponent);
     },
+    canActivate: [AuthGuard],
   },
   {
     path: ApplicationRoute.GetBlogPost,
@@ -83,6 +88,7 @@ const routes: Routes = [
         (m) => m.BlogListComponent,
       );
     },
+    canActivate: [AuthGuard],
   },
   {
     path: ApplicationRoute.BlogPostAdd,
@@ -91,12 +97,22 @@ const routes: Routes = [
         './features/BlogPost/add-blog-list/add-blog-list.component'
       ).then((m) => m.AddBlogListComponent);
     },
+    canActivate: [AuthGuard],
   },
   {
     path: ApplicationRoute.GetBlogPostId,
     loadComponent() {
       return import('./features/BlogPost/edit-blog/edit-blog.component').then(
         (m) => m.EditBlogComponent,
+      );
+    },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: ApplicationRoute.NavBarComp,
+    loadComponent() {
+      return import('./core/components/navbar/navbar.component').then(
+        (m) => m.NavbarComponent,
       );
     },
   },

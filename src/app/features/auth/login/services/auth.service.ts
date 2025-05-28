@@ -27,7 +27,9 @@ export class AuthService {
   }
 
   getUser(): User | undefined {
+    debugger;
     if (this.isBrowser) {
+      debugger;
       const email = localStorage.getItem('user-email');
       const roles = localStorage.getItem('user-roles');
       if (email && roles) {
@@ -48,7 +50,6 @@ export class AuthService {
   }
 
   setUser(user: User): void {
-    debugger;
     this.$user.next(user);
     if (this.isBrowser) {
       localStorage.setItem('user-email', user.email);
@@ -57,7 +58,6 @@ export class AuthService {
   }
 
   user(): Observable<User | undefined> {
-    debugger;
     return this.$user.asObservable();
   }
 }

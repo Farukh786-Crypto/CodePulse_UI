@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -16,18 +20,38 @@ export class HttpService {
   ) {}
 
   get<T>(url: string, params?: any): Observable<T> {
+    // Create headers with 'Skip-Auth' if you want to skip interceptor
+    const headers = new HttpHeaders({ 'Skip-Auth': 'true' });
+
     return this.http
-      .get<T>(this.baseUrl + url, { params })
+      .get<T>(this.baseUrl + url, { params, headers })
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   post<T>(url: string, body: any | null): Observable<T> {
+    // method 1 : pass token by adding headers without interceptor
+    // const headers = new HttpHeaders({
+    //   Authorization: this.cookiesService.get('Authorization'),
+    // });
+
+    // return this.http
+    //   .post<T>(this.baseUrl + url, body, { headers })
+    //   .pipe(catchError(this.errorHandler.bind(this)));
+
     return this.http
       .post<T>(this.baseUrl + url, body)
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   put<T>(url: string, body: any | null): Observable<T> {
+    // method 1 : pass token by adding headers without interceptor
+    // const headers = new HttpHeaders({
+    //   Authorization: this.cookiesService.get('Authorization'),
+    // });
+    // return this.http
+    //   .put<T>(this.baseUrl + url, body, { headers })
+    //   .pipe(catchError(this.errorHandler.bind(this)));
+
     return this.http
       .put<T>(this.baseUrl + url, body)
       .pipe(catchError(this.errorHandler.bind(this)));
