@@ -11,20 +11,29 @@ import { filter, Observable, switchMap, take } from 'rxjs';
 import { getLoadCategory } from '../../../store/category.actions';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { GetCategoryResponse } from '../../../store/category.types';
+import { Category, GetCategoryResponse } from '../../../store/category.types';
+import { ImportsModule } from '../../../common/Modules/imports';
 
 @Component({
   selector: 'app-category-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ImportsModule],
   providers: [HttpService, CategoryService],
   templateUrl: './category-list.component.html',
   styleUrl: './category-list.component.scss',
 })
 export class CategoryListComponent implements OnInit {
   categoriesData: any[] = [];
+  loading: boolean = true;
+  filterValue: string = '';
   categoriesData$?: Observable<GetCategoryResponse>;
+  private _categories: GetCategoryResponse | null = null;
   constructor(private store: Store) {}
+
+  get clonedCategories(): Category[] {
+    return this._categories?.data ? [...this._categories.data] : [];
+  }
+
   ngOnInit(): void {
     // dispatch action
     this.store.dispatch(getLoadCategory());
@@ -38,6 +47,12 @@ export class CategoryListComponent implements OnInit {
         ),
       ),
     );
+
+    // Store the response locally so the getter can access it
+    this.categoriesData$.subscribe((data) => {
+      this._categories = data;
+      this.loading = false;
+    });
 
     //called selector method 2
     // this.store

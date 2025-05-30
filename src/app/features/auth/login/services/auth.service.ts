@@ -44,16 +44,22 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
-    this.cookieService.delete('Authorization', '/');
+    if (this.isBrowser) {
+      localStorage.clear();
+      this.cookieService.delete('Authorization', '/');
+    }
     this.$user.next(undefined);
   }
 
   setUser(user: User): void {
     this.$user.next(user);
     if (this.isBrowser) {
-      localStorage.setItem('user-email', user.email);
-      localStorage.setItem('user-roles', user.roles.join(','));
+      try {
+        localStorage.setItem('user-email', user.email);
+        localStorage.setItem('user-roles', user.roles.join(','));
+      } catch (e) {
+        console.error('Error setting user in localStorage:', e);
+      }
     }
   }
 

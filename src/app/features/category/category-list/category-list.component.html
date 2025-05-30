@@ -1,33 +1,62 @@
-<div class="container">
-  <h1 class="mt-3">Category List</h1>
-  <div class="d-flex justify-content-end mt-3">
-    <a [routerLink]="['/admin/categories/add']" class="btn btn-primary"
-      >Add Category</a
+<ng-container *ngIf="categoriesData$ | async as categories">
+  <ng-container *ngIf="categories?.data?.length">
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <h1>Category List</h1>
+      <input
+        type="text"
+        pInputText
+        placeholder="Search categories..."
+        [(ngModel)]="filterValue"
+        (input)="dt1.filterGlobal(filterValue, 'contains')"
+        class="form-control w-25"
+      />
+      <a [routerLink]="['/admin/categories/add']" class="btn btn-primary">
+        Add Category
+      </a>
+    </div>
+
+    <p-table
+      #dt1
+      [value]="clonedCategories"
+      dataKey="id"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [loading]="loading"
+      [paginator]="true"
+      class="mt-3"
+      showGridlines="true"
+      [tableStyle]="{ 'min-width': '60rem' }"
+      [globalFilterFields]="['id', 'urlHandle', 'name']"
     >
-  </div>
-  <ng-container *ngIf="categoriesData$ | async as categories">
-    <table class="table table-bordered mt-3" *ngIf="categories?.data?.length">
-      <thead>
+      <ng-template pTemplate="header">
         <tr>
-          <th>Id</th>
-          <th>Url</th>
-          <th>Description</th>
+          <th pSortableColumn="id" style="width: 20%">
+            Id <p-sortIcon field="id" />
+          </th>
+          <th pSortableColumn="urlHandle" style="width: 20%">
+            Url <p-sortIcon field="urlHandle" />
+          </th>
+          <th pSortableColumn="name" style="width: 20%">
+            Description <p-sortIcon field="name" />
+          </th>
+          <th>Actions</th>
         </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of categories?.data">
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+        <tr>
           <td>{{ item?.id }}</td>
           <td>{{ item?.urlHandle }}</td>
           <td>{{ item?.name }}</td>
           <td>
             <a
               class="btn btn-light"
-              [routerLink]="['/admin/categories/', item.id]"
-              >Edit</a
+              [routerLink]="['/admin/categories', item.id]"
             >
+              Edit
+            </a>
           </td>
         </tr>
-      </tbody>
-    </table>
+      </ng-template>
+    </p-table>
   </ng-container>
-</div>
+</ng-container>

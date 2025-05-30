@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
 import { ApiResponseModel } from '../../../common/common';
-import {
-  BlogPostSingleResponse,
-  GetBlogPostsResponse,
-} from '../../../store/category.types';
+import { BlogPostSingleResponse } from '../../../store/category.types';
 import { AddBlogPost } from '../../../common/Models/AddBlogPost.model';
 import { BlogPost } from '../../../common/Models/BlogPost.model';
 import { UpdateBlogPost } from '../../../common/Models/UpdateBlogPost.model';
