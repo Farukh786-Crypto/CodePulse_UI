@@ -3,8 +3,8 @@ import { Observable } from 'rxjs';
 import { ApiResponseModel } from '../../../common/common';
 import {
   Category,
-  CategoryResponse,
   CategorySingleResponse,
+  codePulse,
   GetCategoryResponse,
 } from '../../../store/category.types';
 import { HttpService } from './http.service';
@@ -27,28 +27,21 @@ export class CategoryService {
     );
   }
 
-  postCategory(
-    category: Category,
-  ): Observable<ApiResponseModel<CategoryResponse>> {
-    return this.https.post<ApiResponseModel<CategoryResponse>>(
-      'Categories',
-      category,
-    );
+  postCategory(category: Category): Observable<ApiResponseModel<codePulse>> {
+    return this.https.post<ApiResponseModel<codePulse>>('Categories', category);
   }
 
   putCategory(
     categoryId: number,
     category: Category,
-  ): Observable<ApiResponseModel<CategoryResponse>> {
-    return this.https.put<ApiResponseModel<CategoryResponse>>(
+  ): Observable<ApiResponseModel<codePulse>> {
+    return this.https.put<ApiResponseModel<codePulse>>(
       'Categories/' + categoryId,
       category,
     );
   }
 
-  deleteCategory(id: number): Observable<ApiResponseModel<CategoryResponse>> {
-    return this.https.delete<ApiResponseModel<CategoryResponse>>(
-      'Categories/' + id,
-    );
+  deleteCategory(id: number): Observable<ApiResponseModel<codePulse>> {
+    return this.https.delete<ApiResponseModel<codePulse>>('Categories/' + id);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../features/auth/login/services/auth.service';
 import { User } from '../../../common/Models/User.model';
 import { CookieService } from 'ngx-cookie-service';
@@ -29,7 +29,6 @@ export class NavbarComponent implements OnInit {
       error: (err) => {
         console.log(err);
       },
-      complete: () => {},
     });
 
     this.user = this.authService.getUser();

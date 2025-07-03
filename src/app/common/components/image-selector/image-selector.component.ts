@@ -9,8 +9,7 @@ import {
 import { FormsModule, NgForm } from '@angular/forms';
 import { ImageService } from '../../services/image.service';
 import { IImageUpload } from '../../Models/AddImage.model';
-import { Subject, Subscription, takeUntil } from 'rxjs';
-import { error } from 'console';
+import { Subject, takeUntil } from 'rxjs';
 import { ToStrService } from '../../../features/category/Services';
 import { BlogImage } from '../../Models/BlogImage.model';
 
@@ -24,8 +23,8 @@ import { BlogImage } from '../../Models/BlogImage.model';
 })
 export class ImageSelectorComponent implements OnInit, OnDestroy {
   private file?: File;
-  fileName: string = '';
-  title: string = '';
+  fileName = '';
+  title = '';
   private destroy$ = new Subject<void>();
   images: BlogImage[] = [];
   @Output() imageUrlSelected = new EventEmitter<BlogImage>();
@@ -52,7 +51,6 @@ export class ImageSelectorComponent implements OnInit, OnDestroy {
         error: (error) => {
           this.tostr.showError(error);
         },
-        complete: () => {},
       });
   }
 
@@ -93,7 +91,6 @@ export class ImageSelectorComponent implements OnInit, OnDestroy {
   }
 
   selectImage(image: BlogImage) {
-    debugger;
     this.imageUrlSelected.emit(image);
   }
 

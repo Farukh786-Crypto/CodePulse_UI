@@ -46,8 +46,8 @@ export class EditBlogComponent implements OnInit, OnDestroy {
   id!: string | null;
   BlogPostForm!: FormGroup;
   getAllCategories: Category[] = [];
-  blogPostId: string = '';
-  isImageSelectorVisible: boolean = false;
+  blogPostId = '';
+  isImageSelectorVisible = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -149,7 +149,7 @@ export class EditBlogComponent implements OnInit, OnDestroy {
   }
 
   get categoriesData() {
-    let getCategoriesData = this.BlogPostForm.get('categories')?.value || '';
+    const getCategoriesData = this.BlogPostForm.get('categories')?.value || '';
     return getCategoriesData;
   }
 
@@ -178,7 +178,7 @@ export class EditBlogComponent implements OnInit, OnDestroy {
   }
 
   deletedPost() {
-    let blogId = this.BlogPostForm.get('id')?.value;
+    const blogId = this.BlogPostForm.get('id')?.value;
     this.deleteBlogPostSubscription = this.BlogPostservice.deletePost(
       blogId,
     ).subscribe({

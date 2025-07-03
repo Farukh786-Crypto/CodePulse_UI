@@ -24,8 +24,8 @@ import { ImportsModule } from '../../../common/Modules/imports';
 })
 export class CategoryListComponent implements OnInit {
   categoriesData: any[] = [];
-  loading: boolean = true;
-  filterValue: string = '';
+  loading = true;
+  filterValue = '';
   categoriesData$?: Observable<GetCategoryResponse>;
   private _categories: GetCategoryResponse | null = null;
   constructor(private store: Store) {}

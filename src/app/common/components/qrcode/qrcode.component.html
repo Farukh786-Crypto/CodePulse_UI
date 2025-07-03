@@ -1,0 +1,52 @@
+<div>
+  <!-- <h3>QR Code Generator</h3> -->
+  <!-- <input
+    type="text"
+    [(ngModel)]="qrText"
+    placeholder="Enter Text"
+    class="form-control mb-3 w-25 mx-auto"
+  /> -->
+
+  <button type="submit" class="btn btn-primary" (click)="generateQRCode()">
+    Click QR
+  </button>
+
+  <!-- Modal -->
+  <div
+    #qrModal
+    class="modal fade"
+    id="exampleModalCenter"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">
+            Please pay here !!
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body text-center">
+          <div *ngIf="qrcodeImage">
+            <div class="text-center">
+              <img
+                [src]="qrcodeImage"
+                alt="QR Code"
+                class="img-fluid"
+                style="max-width: 300px; max-height: 300px"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

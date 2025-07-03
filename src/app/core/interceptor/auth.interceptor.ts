@@ -11,7 +11,6 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private cookiesService: CookieService) {}
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler) {
-    debugger;
     if (req.headers.has('Skip-Auth')) {
       const cloned = req.clone({
         headers: req.headers.delete('Skip-Auth'),

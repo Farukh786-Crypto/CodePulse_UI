@@ -58,9 +58,11 @@
         <ng-template #showLogout>
           <div class="d-flex align-items-center">
             <span>{{ user?.email }}</span>
-            <button class="btn btn-primary ms-3" (click)="onLogout()">
+            <button class="btn btn-primary ms-3 me-2" (click)="onLogout()">
               Logout
             </button>
+            <!-- added QR code component here -->
+            <app-qrcode></app-qrcode>
           </div>
         </ng-template>
       </div>

@@ -42,7 +42,7 @@ export class AddBlogListComponent implements OnInit {
   contentValue!: string;
   featureImageUrl!: string;
   categoriesData: Category[] = [];
-  isImageSelectorVisible: boolean = false;
+  isImageSelectorVisible = false;
 
   constructor(
     private fb: FormBuilder,

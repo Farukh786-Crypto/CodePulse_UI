@@ -1,42 +1,47 @@
-import { isDevMode, NgModule } from '@angular/core';
+import { isDevMode, NgModule } from "@angular/core";
 import {
   BrowserModule,
   provideClientHydration,
-} from '@angular/platform-browser';
+} from "@angular/platform-browser";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './core/components/navbar/navbar.component';
-import { StoreModule } from '@ngrx/store';
-import { CodePulseReducer } from './store/category.reducer';
-import { CategoryEffects } from './store/category.effect';
-import { EffectsModule } from '@ngrx/effects';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { NavbarComponent } from "./core/components/navbar/navbar.component";
+import { StoreModule } from "@ngrx/store";
+import { CodePulseReducer } from "./store/category.reducer";
+import { CategoryEffects } from "./store/category.effect";
+import { EffectsModule } from "@ngrx/effects";
 import {
   HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
-} from '@angular/common/http';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment.development';
-import { MarkdownModule } from 'ngx-markdown';
-import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
-import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
-import { MomentModule } from 'ngx-moment';
-import { AuthService } from './features/auth/login/services/auth.service';
-import { AuthInterceptor } from './core/interceptor/auth.interceptor';
+} from "@angular/common/http";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { environment } from "../environments/environment.development";
+import { MarkdownModule } from "ngx-markdown";
+import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from "ngx-ui-loader";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
+import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
+import { MomentModule } from "ngx-moment";
+import { AuthService } from "./features/auth/login/services/auth.service";
+import { AuthInterceptor } from "./core/interceptor/auth.interceptor";
+import { QRCodeComponent } from "./common/components/qrcode/qrcode.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { QrcodeService } from "./common/services/qrcode.service";
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent, QRCodeComponent],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MomentModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       progressBar: true,
-      positionClass: 'toast-top-right',
+      positionClass: "toast-top-right",
     }),
     AppRoutingModule,
     NgxUiLoaderModule,
@@ -45,13 +50,14 @@ import { AuthInterceptor } from './core/interceptor/auth.interceptor';
     MarkdownModule.forRoot(),
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
-    StoreModule.forFeature('category', CodePulseReducer),
+    StoreModule.forFeature("category", CodePulseReducer),
     EffectsModule.forFeature([CategoryEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     HttpClientModule,
   ],
   providers: [
-    { provide: 'CODEBASEURL', useValue: environment.apiBaseUrl },
+    { provide: "CODEBASEURL", useValue: environment.apiBaseUrl },
+    QrcodeService,
     provideClientHydration(),
     provideHttpClient(),
     AuthService,

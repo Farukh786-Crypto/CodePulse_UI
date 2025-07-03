@@ -17,7 +17,7 @@ export class AuthService {
   constructor(
     private https: HttpService,
     private cookieService: CookieService,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId: object,
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
@@ -27,9 +27,7 @@ export class AuthService {
   }
 
   getUser(): User | undefined {
-    debugger;
     if (this.isBrowser) {
-      debugger;
       const email = localStorage.getItem('user-email');
       const roles = localStorage.getItem('user-roles');
       if (email && roles) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../../features/category/Services';
 import { IImageUpload } from '../Models/AddImage.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BlogImage } from '../Models/BlogImage.model';
 
 @Injectable({

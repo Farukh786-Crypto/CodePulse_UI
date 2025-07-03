@@ -1,8 +1,8 @@
 import { ActionType, createAction, props } from '@ngrx/store';
 import {
   Category,
-  CategoryResponse,
   CategorySingleResponse,
+  codePulse,
   GetCategoryResponse,
 } from './category.types';
 
@@ -35,7 +35,7 @@ export const loadCategory = createAction(
 
 export const loadCategorySuccess = createAction(
   LOAD_CATEGORY_SUCCESS,
-  props<{ categoryResponse: CategoryResponse }>(),
+  props<{ categoryResponse: codePulse }>(),
 );
 
 export const loadCategoryFailure = createAction(
@@ -92,7 +92,7 @@ export const deleteCategory = createAction(
 
 export const deleteCategorySuccess = createAction(
   DELETE_CATEGORY_SUCCESS,
-  props<{ categoryResponse: CategoryResponse }>(),
+  props<{ categoryResponse: codePulse }>(),
 );
 
 export const deleteCategoryFailure = createAction(

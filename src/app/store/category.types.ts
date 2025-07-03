@@ -1,6 +1,7 @@
 // Request passing For Post category
 
 import { DataState } from '../common/common';
+import { BlogPost } from '../common/Models/BlogPost.model';
 
 export interface Category {
   id: number;
@@ -13,9 +14,9 @@ export interface codePulse {
   message: string;
 }
 
-export interface BlogPost extends codePulse {}
+//export interface BlogPost extends codePulse {}
 // Response getting For Post category
-export interface CategoryResponse extends codePulse {}
+//export interface CategoryResponse extends codePulse {}
 
 // Response getting get By category Id
 export interface CategorySingleResponse {
@@ -44,9 +45,9 @@ export interface GetBlogPostsResponse {
 
 // passing Datastate and their response
 export interface CodePulseStoreState {
-  categoryStore: DataState<CategoryResponse>;
+  categoryStore: DataState<codePulse>;
   getcategoryStore: DataState<GetCategoryResponse>;
   getcategorybyidStore: DataState<CategorySingleResponse>;
   updatecategoryStore: DataState<CategorySingleResponse>;
-  deletecategoryStore: DataState<CategoryResponse>;
+  deletecategoryStore: DataState<codePulse>;
 }
