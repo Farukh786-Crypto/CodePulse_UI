@@ -23,19 +23,18 @@ import { BlogImage } from '../../../common/Models/BlogImage.model';
 import { ImageSelectorComponent } from '../../../common/components/image-selector/image-selector.component';
 
 @Component({
-  selector: 'app-add-blog-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MarkdownModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    ImageSelectorComponent,
-  ],
-  providers: [BlogService],
-  templateUrl: './add-blog-list.component.html',
-  styleUrl: './add-blog-list.component.scss',
+    selector: 'app-add-blog-list',
+    imports: [
+        CommonModule,
+        MarkdownModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        ImageSelectorComponent,
+    ],
+    providers: [BlogService],
+    templateUrl: './add-blog-list.component.html',
+    styleUrl: './add-blog-list.component.scss'
 })
 export class AddBlogListComponent implements OnInit {
   BlogPostForm!: FormGroup;

@@ -8,11 +8,10 @@ import { BlogPost } from '../../../common/Models/BlogPost.model';
 import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
-  selector: 'app-blog-details',
-  standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, MarkdownModule],
-  templateUrl: './blog-details.component.html',
-  styleUrl: './blog-details.component.scss',
+    selector: 'app-blog-details',
+    imports: [CommonModule, RouterModule, FormsModule, MarkdownModule],
+    templateUrl: './blog-details.component.html',
+    styleUrl: './blog-details.component.scss'
 })
 export class BlogDetailsComponent implements OnInit, OnDestroy {
   url!: string | null;

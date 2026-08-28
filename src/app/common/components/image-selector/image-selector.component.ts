@@ -14,12 +14,11 @@ import { ToStrService } from '../../../features/category/Services';
 import { BlogImage } from '../../Models/BlogImage.model';
 
 @Component({
-  selector: 'app-image-selector',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  providers: [ImageService],
-  templateUrl: './image-selector.component.html',
-  styleUrl: './image-selector.component.scss',
+    selector: 'app-image-selector',
+    imports: [CommonModule, FormsModule],
+    providers: [ImageService],
+    templateUrl: './image-selector.component.html',
+    styleUrl: './image-selector.component.scss'
 })
 export class ImageSelectorComponent implements OnInit, OnDestroy {
   private file?: File;

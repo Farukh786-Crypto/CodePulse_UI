@@ -8,12 +8,11 @@ import { Router } from '@angular/router';
 import { ToStrService } from '../../category/Services';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  providers: [AuthService, CookieService],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+    selector: 'app-login',
+    imports: [CommonModule, FormsModule],
+    providers: [AuthService, CookieService],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   model!: LoginRequest;

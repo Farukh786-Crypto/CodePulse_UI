@@ -15,12 +15,11 @@ import { Category, GetCategoryResponse } from '../../../store/category.types';
 import { ImportsModule } from '../../../common/Modules/imports';
 
 @Component({
-  selector: 'app-category-list',
-  standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ImportsModule],
-  providers: [HttpService, CategoryService],
-  templateUrl: './category-list.component.html',
-  styleUrl: './category-list.component.scss',
+    selector: 'app-category-list',
+    imports: [CommonModule, RouterModule, FormsModule, ImportsModule],
+    providers: [HttpService, CategoryService],
+    templateUrl: './category-list.component.html',
+    styleUrl: './category-list.component.scss'
 })
 export class CategoryListComponent implements OnInit {
   categoriesData: any[] = [];
