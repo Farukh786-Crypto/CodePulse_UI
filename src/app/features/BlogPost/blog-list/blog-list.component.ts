@@ -6,12 +6,11 @@ import { BlogService } from '../../category/Services/blog.service';
 import { BlogPost } from '../../../common/Models/BlogPost.model';
 
 @Component({
-  selector: 'app-blog-list',
-  standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
-  providers: [BlogService],
-  templateUrl: './blog-list.component.html',
-  styleUrl: './blog-list.component.scss',
+    selector: 'app-blog-list',
+    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+    providers: [BlogService],
+    templateUrl: './blog-list.component.html',
+    styleUrl: './blog-list.component.scss'
 })
 export class BlogListComponent implements OnInit {
   blogPosts: BlogPost[] = [];

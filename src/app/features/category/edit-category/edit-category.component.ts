@@ -31,18 +31,17 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../../../core/interceptor/auth.interceptor';
 
 @Component({
-  selector: 'app-edit-category',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
-  ],
-  templateUrl: './edit-category.component.html',
-  styleUrl: './edit-category.component.scss',
+    selector: 'app-edit-category',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+        },
+    ],
+    templateUrl: './edit-category.component.html',
+    styleUrl: './edit-category.component.scss'
 })
 export class EditCategoryComponent implements OnInit, OnDestroy {
   id = 0;

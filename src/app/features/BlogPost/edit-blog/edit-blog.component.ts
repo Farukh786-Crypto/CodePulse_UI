@@ -24,18 +24,17 @@ import { ImageService } from '../../../common/services/image.service';
 import { BlogImage } from '../../../common/Models/BlogImage.model';
 
 @Component({
-  selector: 'app-edit-blog',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MarkdownModule,
-    ImageSelectorComponent,
-  ],
-  providers: [BlogService, ImageService],
-  templateUrl: './edit-blog.component.html',
-  styleUrl: './edit-blog.component.scss',
+    selector: 'app-edit-blog',
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MarkdownModule,
+        ImageSelectorComponent,
+    ],
+    providers: [BlogService, ImageService],
+    templateUrl: './edit-blog.component.html',
+    styleUrl: './edit-blog.component.scss'
 })
 export class EditBlogComponent implements OnInit, OnDestroy {
   routeSubscription?: Subscription;

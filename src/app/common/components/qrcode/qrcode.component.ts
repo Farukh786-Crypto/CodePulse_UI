@@ -9,11 +9,12 @@ import { QrcodeService } from "../../services/qrcode.service";
 import { isPlatformBrowser } from "@angular/common";
 
 @Component({
-  selector: "app-qrcode",
-  // standalone: true,
-  // imports: [CommonModule, FormsModule],
-  templateUrl: "./qrcode.component.html",
-  styleUrl: "./qrcode.component.scss",
+    selector: "app-qrcode",
+    // standalone: true,
+    // imports: [CommonModule, FormsModule],
+    templateUrl: "./qrcode.component.html",
+    styleUrl: "./qrcode.component.scss",
+    standalone: false
 })
 export class QRCodeComponent {
   qrText: string = "Hello World!"; // Default text for QR code

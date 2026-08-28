@@ -22,12 +22,11 @@ import { hasValidationErrors, ToStrService } from '../Services';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-add-category',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  providers: [CategoryService],
-  templateUrl: './add-category.component.html',
-  styleUrl: './add-category.component.scss',
+    selector: 'app-add-category',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule],
+    providers: [CategoryService],
+    templateUrl: './add-category.component.html',
+    styleUrl: './add-category.component.scss'
 })
 export class AddCategoryComponent implements OnInit, OnDestroy {
   categoryForm!: FormGroup;
